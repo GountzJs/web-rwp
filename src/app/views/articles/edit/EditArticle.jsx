@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Footer } from "../../../components/layouts/footer/Footer";
-import { NavbarUser } from "../../../components/layouts/header/NavbarUser";
-import { GetArticleHook } from '../../../hooks/GetArticleHook';
+import { Footer, NavbarUser } from "@/app/components";
+import { GetArticleHook } from '@/app/hooks';
 import { FormArticleEdit } from "./FormArticleEdit";
 
 export function EditArticle() {

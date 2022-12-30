@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { GetArticleService } from '../services/articles/GetArticleService';
+import { GetArticleService } from '@/app/services';
 
 export function GetArticleHook({ slug, setArticle }) {
   const get = GetArticleService({ slug });

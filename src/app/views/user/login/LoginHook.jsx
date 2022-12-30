@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { LocalStorageService } from "../../../core/services/localStorageService";
-import { LoginService } from "../../../services/users/LoginService";
+import { LocalStorageService } from "@/app/core";
+import { LoginService } from "@/app/services";
 
 export function LoginHook({ form, setErrors, setDisabled }) {
   const login = LoginService({ email: form.email, password: form.password });

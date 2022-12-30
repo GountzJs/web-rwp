@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { LocalStorageService } from "../../../core/services/localStorageService";
-import { RegisterService } from "../../../services/users/RegisterService";
+import { RegisterService } from '@/app/services';
 
 export function RegisterHook({ form, setErrors, setDisabled }) {
   const register = RegisterService({ email: form.email, username: form.username, password: form.password });

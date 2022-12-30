@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Footer } from "../../../components/layouts/footer/Footer";
-import { NavbarUser } from "../../../components/layouts/header/NavbarUser";
+import { NavbarUser, Footer } from "@/app/components";
 import { FormArticle } from "./FormArticle";
 
 export function CreateArticle() {

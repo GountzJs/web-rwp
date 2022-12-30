@@ -1,4 +1,4 @@
-import { CreateArticleService } from "../../../services/articles/CreateArticleService";
+import { CreateArticleService } from "@/app/services";
 
 export function CreateArticleHook({ form, setForm, setDisabled, setErrors }) {
   const post = CreateArticleService({ 

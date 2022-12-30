@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { ButtonForm } from "../../../components/buttons/ButtonForm";
-import { InputCustom } from "../../../components/forms/InputCustom";
+import { ButtonForm, InputCustom } from "@/app/components";
 import { RegisterHook } from "./RegisterHook";
 
 export function FormRegister({ setErrors }) {

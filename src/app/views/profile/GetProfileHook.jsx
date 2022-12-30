@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { GetProfileService } from '../../services/profile/GetProfileService';
+import { GetProfileService } from '@/app/services';
 
 export function GetProfileHook({ username, setProfile }) {
   const get = GetProfileService({ username });

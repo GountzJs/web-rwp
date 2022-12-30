@@ -1,4 +1,4 @@
-import { FollowProfileService } from "../../services/profile/FollowProfileService";
+import { FollowProfileService } from "@/app/services";
 
 export function FollowProfileHook({ username, setFollow }) {
   const post = FollowProfileService({ username });

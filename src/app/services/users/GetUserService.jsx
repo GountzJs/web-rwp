@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { ApiInterceptor } from "../../core/interceptors/ApiInterceptor";
+import { ApiInterceptor } from "@/app/core";
 
 export function GetUserService() {
   const axiosInstance = ApiInterceptor();

@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import { ButtonForm } from '../../../components/buttons/ButtonForm';
-import { InputCustom } from '../../../components/forms/InputCustom';
-import { TextAreaCustom } from '../../../components/forms/TextAreaCustom';
-import { GetUserHook } from '../../../hooks/GetUserHook';
+import { ButtonForm, InputCustom, TextAreaCustom  } from '@/app/components';
+import { GetUserHook } from '@/app/hooks';
 import { EditUserHook } from './EditUserHook';
 
 export function FormSettings({ setErrors }) {

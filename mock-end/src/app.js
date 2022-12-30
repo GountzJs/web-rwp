@@ -11,23 +11,23 @@ export class App {
 
   constructor() {
     this.app = express();
-    this.initConfig();
-    this.initController();
-    this.initServer();
+    this.#initConfig();
+    this.#initController();
+    this.#initServer();
   }
 
-  initConfig() {
+  #initConfig() {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(cors({ origin: '*' }));
   }
 
-  initController() {
+  #initController() {
     const routes = [new UsersRoutes(), new ProfilesRoutes(), new ArticlesRoutes(), new FavoritesRoutes()]
     routes.map(route => this.app.use('/api', route.router));
   }
 
-  initServer() {
+  #initServer() {
     this.app.listen(Number(process.env.PORT), String(process.env.HOST), () => {
       console.log(`Server running on port: http://${String(process.env.HOST)}:${Number(process.env.PORT)}/`);
     });

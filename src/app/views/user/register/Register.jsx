@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Footer } from '../../../components/layouts/footer/Footer';
-import { Navbar } from '../../../components/layouts/header/Navbar';
+import { Footer, Navbar } from '@/app/components';
 import { FormRegister } from "./FormRegister";
 
 export function Register() {

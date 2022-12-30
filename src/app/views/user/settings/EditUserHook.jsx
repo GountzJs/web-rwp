@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { EditUserService } from "../../../services/users/EditUserService";
+import { EditUserService } from "@/app/services";
 
 export function EditUserHook({ form, setErrors , setDisabled}) {
   const put = EditUserService({ image: form.image, username: form.username, bio: form.bio, email: form.email, password: form.password });

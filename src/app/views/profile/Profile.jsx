@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Footer } from "../../components/layouts/footer/Footer";
-import { Navbar } from "../../components/layouts/header/Navbar";
-import { NavbarUser } from "../../components/layouts/header/NavbarUser";
-import { LocalStorageService } from "../../core/services/LocalStorageService";
+import { Footer, Navbar, NavbarUser } from "@/app/components";
+import { LocalStorageService } from "@/app/core";
 import { ButtonFollow } from "./ButtonFollow";
 import { GetProfileHook } from "./GetProfileHook";
 

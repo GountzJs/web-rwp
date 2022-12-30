@@ -1,4 +1,4 @@
-import { UnFollowProfileService } from "../../services/profile/UnFollowProfileService";
+import { UnFollowProfileService } from "@/app/services";
 
 export function UnFollowProfileHook({ username, setFollow }) {
   const unfollow = UnFollowProfileService({ username });

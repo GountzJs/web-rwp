@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { ButtonForm } from "../../../components/buttons/ButtonForm";
-import { InputCustom } from "../../../components/forms/InputCustom";
+import { InputCustom, ButtonForm } from "@/app/components";
 import { LoginHook } from "./LoginHook";
 
 export function FormLogin({ setErrors }) {

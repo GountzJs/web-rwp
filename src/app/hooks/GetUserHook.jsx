@@ -1,5 +1,5 @@
-import { LocalStorageService } from "../core/services/LocalStorageService";
-import { GetUserService } from "../services/users/GetUserService";
+import { LocalStorageService } from "@/app/core";
+import { GetUserService } from "@/app/services";
 
 export function GetUserHook({ setUser }) {
   const get = GetUserService();

@@ -2,13 +2,15 @@ import React from "react";
 import {
   createBrowserRouter
 } from "react-router-dom";
-import { CreateArticle } from "./views/articles/create/CreateArticle";
-import { EditArticle } from "./views/articles/edit/EditArticle";
-import { Home } from "./views/home/Home";
-import { Profile } from "./views/profile/Profile";
-import { Login } from "./views/user/login/Login";
-import { Register } from "./views/user/register/Register";
-import { Settings } from "./views/user/settings/Settings";
+import { 
+  CreateArticle, 
+  EditArticle, 
+  Home, 
+  Profile, 
+  Login, 
+  Register, 
+  Settings
+} from "@/app/views";
 
 export const router = createBrowserRouter([
   {

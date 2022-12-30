@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Footer } from '../../../components/layouts/footer/Footer';
-import { NavbarUser } from '../../../components/layouts/header/NavbarUser';
-import { LocalStorageService } from "../../../core/services/LocalStorageService";
+import { Footer, NavbarUser } from '@/app/components';
+import { LocalStorageService } from "@/app/core";
 import { FormSettings } from "./FormSettings";
 
 export function Settings() {

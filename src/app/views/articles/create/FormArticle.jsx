@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { ButtonForm } from "../../../components/buttons/ButtonForm";
-import { InputCustom } from "../../../components/forms/InputCustom";
-import { TextAreaCustom } from "../../../components/forms/TextAreaCustom";
+import { TextAreaCustom, InputCustom, ButtonForm } from "@/app/components";
 import { CreateArticleHook } from "./CreateArticleHook";
 
 export function FormArticle({ setErrors }) {

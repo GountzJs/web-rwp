@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { EditArticleService } from "../../../services/articles/EditArticleService";
+import { EditArticleService } from "@/app/services";
 
 export function EditArticleHook({ slug, form, setDisabled, setErrors }) {
   const navigate = useNavigate();
