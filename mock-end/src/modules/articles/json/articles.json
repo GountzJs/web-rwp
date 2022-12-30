@@ -1,0 +1,32 @@
+{
+	"articles": [
+		{
+			"id": "4bdb47fc-7ece-4ec3-b550-e2ff2a6e6c4b",
+			"slug": "nuevo-articulo-3",
+			"title": "Nuevo articulo 3",
+			"description": "nueva descripcion",
+			"body": "nuevo body",
+			"tagList": [
+				"angular"
+			],
+			"author": "2a39f5a2-9d54-480c-b3b6-94fcb81631ad",
+			"favoritesCount": 1,
+			"createdAt": "2022-12-28T12:25:04.873Z",
+			"updatedAt": "2022-12-29T16:49:20.595Z"
+		},
+		{
+			"id": "dafcd175-bb6b-4a18-b2f8-5c46f2c08368",
+			"slug": "nuevo-articulo-2",
+			"title": "Nuevo articulo 2",
+			"description": "descripcion",
+			"body": "body",
+			"tagList": [
+				"react"
+			],
+			"author": "2a39f5a2-9d54-480c-b3b6-94fcb81631ad",
+			"favoritesCount": 0,
+			"createdAt": "2022-12-29T16:47:56.368Z",
+			"updatedAt": "2022-12-29T16:47:56.368Z"
+		}
+	]
+}

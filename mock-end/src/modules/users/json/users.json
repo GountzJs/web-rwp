@@ -1,0 +1,20 @@
+{
+	"users": [
+		{
+			"id": "2a39f5a2-9d54-480c-b3b6-94fcb81631ad",
+			"email": "tomasfgraziano@hotmail.com",
+			"username": "tomasfg",
+			"password": "tomy1432",
+			"bio": "Bio of example",
+			"image": "https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png"
+		},
+		{
+			"id": "0706d327-89de-4c3e-b254-bbc13fa89eb8",
+			"email": "testapp@hotmail.com",
+			"username": "testapp",
+			"password": "tomy1432",
+			"bio": "Bio of example",
+			"image": "https://api.realworld.io/images/smiley-cyrus.jpeg"
+		}
+	]
+}
