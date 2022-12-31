@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { environment } from '@/environments/env.local.js';
-import { LocalStorageService } from '@/app//services';
+import { LocalStorageService } from '@/app/core';
 
 export function ApiInterceptor() {
   const axiosInstance = axios.create({ baseURL: environment.url });
