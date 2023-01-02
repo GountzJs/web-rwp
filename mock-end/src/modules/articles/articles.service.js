@@ -13,36 +13,40 @@ export class ArticlesService {
     return title.toLowerCase().replace(/ /g, '-');
   }
 
-  async #getByAuthor(author) {
-    const { articles } = await this.dataBase.read('articles', 'articles');
-    return articles.map(art => art.author === author);
-  }
-
-  async #getGlobalAuthor(users, author) {
-    const user = users.find(us => us.username === author);
-    const articles = this.#getByAuthor(user.id);
-    return articles.map(article => {
-      delete article.id;
-      return { 
-        ...article,
+  async #getGlobalAuthorAuth(filters, users, articles, id) {
+    const { limit, offset, author } = filters;
+    const athr = users.find(us => us.username === author);
+    if(!athr) throw { code: 404 };
+    const articlesResponse = articles.filter(atr => atr.author === athr.id).slice(offset, limit + offset);
+    const { userProfiles } = await this.dataBase.read('profiles', 'userProfiles');
+    const { userArticles } = await this.dataBase.read('articles', 'userArticles');
+    const userProfile = userProfiles.find(usPrf => usPrf.user === id && usPrf.author === athr.id);
+    return Promise.all(articlesResponse.map(async art => {
+      const userArticle = userArticles.find(usArt => usArt.article === art.id && usArt.user === id);
+      delete art.id;
+      return {
+        ...art,
+        favorited: userArticle?.favorited ?? false,
         author: {
-          username: user.username,
-          bio: user.bio,
-          image: user.image,
-          following: false
+          username: athr.username,
+          bio: athr.bio,
+          image: athr.image,
+          following: userProfile?.following ?? false
         }
       }
-    });
+    }))
   }
 
-  async #getGlobalAuthorAuth(id, users, user, author) {
+  #getGlobalAuthor(filters, users, articles) {
+    const { limit, offset, author } = filters;
     const athr = users.find(us => us.username === author);
-    const articles = this.#getByAuthor(athr.id);
-    const userProfile = await this.dataBase.read('', '');
-    return Promise.all(articles.map(async article => {
-      delete article.id;
+    if(!athr) throw { code: 404 };
+    const articlesResponse = articles.filter(atr => atr.author === athr.id).slice(offset, limit + offset);
+    return articlesResponse.map(art => {
+      delete art.id;
       return {
-        ...article,
+        ...art,
+        favorited: false,
         author: {
           username: athr.username,
           bio: athr.bio,
@@ -50,8 +54,100 @@ export class ArticlesService {
           following: false
         }
       }
-    }));
+    });
   }
+
+  #getGlobalAll(filters, articles, users) {
+    return articles.map(art => {
+      const author = users.find(us => us.id === art.author);
+      delete art.id;
+      return {
+        ...art,
+        favorited: false,
+        author: {
+          username: author.username,
+          bio: author.bio,
+          image: author.image,
+          following: false
+        }
+      }
+    }).slice(filters.offset, filters.limit + filters.offset);
+  }
+
+  async #getGlobalAllAuth(filters, users, articles, id) {
+    const { userProfiles } = await this.dataBase.read('profiles', 'userProfiles');
+    const { userArticles } = await this.dataBase.read('articles', 'userArticles');
+    return articles.map(art => {
+      const author = users.find(us => us.id === art.author);
+      const userProfile = userProfiles.find(usPrf => usPrf.user === id && usPrf.profile === author.id);
+      const userArticle = userArticles.find(usArt => usArt.article === art.id && usArt.user === id);
+      delete art.id;
+      return {
+        ...art,
+        favorited: userArticle?.following ?? false,
+        author: {
+          username: author.username,
+          bio: author.bio,
+          image: author.image,
+          following: userProfile.following ?? false
+        }
+      }
+    }).slice(filters.offset, filters.limit + filters.offset);
+  }
+
+
+
+  async #getGlobalFavorited(filters, favorited, users, articles) {
+    const { userProfiles } = await this.dataBase.read('profiles', 'userProfiles');
+    const userFavorited = users.find(us => us.username === favorited);
+    if(!userFavorited) throw { code: 404 };
+    const usersFollowing = userProfiles.filter(usPrf => usPrf.user === userFavorited.id && usPrf.following);
+    const articleResponse = articles.filter(
+      art => usersFollowing.some(us => us.profile === art.author)
+    ).slice(filters.offset, filters.limit + filters.offset);
+    return articleResponse.map(art => {
+      delete art.id;
+      const author = users.find(us => us.id === art.author);
+      return {
+        ...art,
+        favorited: false,
+        author: {
+          username: author.username,
+          bio: author.bio,
+          image: author.image,
+          following: false
+        }
+      }
+    })
+  }
+
+  async #getGlobalFavoritedAuth(filters, favorited, users, articles, id) {
+    const { userProfiles } = await this.dataBase.read('profiles', 'userProfiles');
+    const { userArticles } = await this.dataBase.read('articles', 'userArticles');
+    const userFavorited = users.find(us => us.username === favorited);
+    if(!userFavorited) throw { code: 404 };
+    const usersFollowing = userProfiles.filter(usPrf => usPrf.user === userFavorited.id && usPrf.following);
+    const articleResponse = articles.filter(
+      art => usersFollowing.some(us => us.profile === art.author)
+    ).slice(filters.offset, filters.limit + filters.offset);
+    return Promise.all(articleResponse.map(async art => {
+      const userArticle = userArticles.find(usArt => usArt.user === id && usArt.article === art.id);
+      const userProfile = userProfiles.find(usPrf => usPrf.user === id && usPrf.profile === art.author);
+      delete art.id;
+      const author = users.find(us => us.id === art.author);
+      return {  
+        ...art,
+        favorited: userArticle?.favorited ?? false,
+        author: {
+          username: author.username,
+          bio: author.bio,
+          image: author.image,
+          following: userProfile.following ?? false
+        }
+      }
+    }))
+  }
+
 
   async created(id, title, description, body, tagList) {
     const { articles } = await this.dataBase.read('articles', 'articles');
@@ -163,15 +259,26 @@ export class ArticlesService {
     }
   }
 
-
   async getGlobal(id, limit, offset, author, favorited, tag) {
+    const { articles } = await this.dataBase.read('articles', 'articles');
     const { users } = await this.dataBase.read('users', 'users');
+    let articlesResponse;
+    const filters = { limit, offset };
     if(author) {
-      const articles = this.#getGlobalAuthor(users, author);
-      const result = articles.slice(offset, limit + offset);
-      return { articles: result, articlesCount: articles.length }
+      filters.author = author;
+      articlesResponse = id
+        ? await this.#getGlobalAuthorAuth(filters, users, articles, id)
+        : this.#getGlobalAuthor(filters, users, articles);
     } else if(favorited) {
-      const fvt = users.find(us => us)
+      filters.favorite = favorited;
+      articlesResponse = id
+        ? await this.#getGlobalFavoritedAuth(filters, favorited, users, articles, id) 
+        : await this.#getGlobalFavorited(filters, favorited, users, articles);
+    } else {
+      articlesResponse = id
+        ? await this.#getGlobalAllAuth(filters, users, articles, id) 
+        : this.#getGlobalAll(filters, articles, users);
     }
+    return { articles: articlesResponse, articlesCount: articles.length };
   }
 }

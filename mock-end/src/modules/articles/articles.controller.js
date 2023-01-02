@@ -9,6 +9,17 @@ export class ArticlesController {
     this.articlesService = new ArticlesService();
     this.httpService = new HttpService();
   }
+ 
+  getGlobal = (req, res) => {
+    const { limit = '20', offset = '0', author, favorited } = req.query || { undefined };
+    const user = req.user;
+    this.articlesService.getGlobal(user?.id, Number(limit), Number(offset), author, favorited, null)
+      .then(response => this.httpService.success(res, response))
+      .catch(err => {
+        console.log(err);
+        this.httpService.serverError(res);
+      });
+  }
 
   create = (req, res) => {
     const user = req.user;

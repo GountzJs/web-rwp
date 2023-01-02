@@ -17,6 +17,7 @@ export class ArticlesRoutes {
   }
 
   initRoutes() {
+    this.router.get(this.path, this.middleware.authenticateOptional, this.controller.getGlobal);
     this.router.post(this.path, this.middleware.authenticate, this.middleware.createValidator, this.controller.create);
     this.router.get(this.path + '/:slug', this.middleware.authenticateOptional, this.controller.getArticle);
     this.router.put(this.path + '/:slug', this.middleware.authenticate, this.controller.editArticle);
