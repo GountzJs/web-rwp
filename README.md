@@ -14,6 +14,17 @@ For more information on how to this works with other frontends/backends, head ov
 
 The React application was designed with a modular architecture. Inside the app/ folder, you will find the pages/ folder containing components for different application pages, and a modules/ folder with various subfolders housing different modules. The distinctive module is the shared/ module, where components, guards, services, Redux, hooks, and other files are located. These files can be used across different modules or pages of the application.
 
+> ## Features
+
+- General functionality:
+  - Authenticate users via JWT (login/signup pages + logout button on settings page)
+  - CRU- users (sign up & settings page - no deleting required)
+  - CRUD Articles
+  - CR-D Comments on articles (no updating required)
+  - GET and display paginated lists of articles
+  - Favorite articles
+  - Follow other users
+
 > ## Api Configuration
 
 Vite allows using environment variables similar to how Node.js does it on the backend. The application has only one environment variable, which is the API URL. In the repository, you will find the .env file with the VITE_API_URI variable. By default, you can use the URL: ***https://api.realworld.io/api/***, which is the demo API provided by [thinkster](https://thinkster.io/). If you have your own backend, add your URL and ensure that when you start the frontend, it has access to that URL.
