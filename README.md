@@ -44,7 +44,7 @@ Before running this project, make sure you have Node.js installed on your system
 
 Once you have Node.js installed, you can proceed with the following steps to set up and run the project locally:
 
-1. Clone this repository: git clone https://github.com/GountzJs/real-world-project.git
+1. Clone this repository: git clone https://github.com/GountzJs/web-rwp.git
 2. Navigate to the project directory: cd web-rwp
 3. Install the dependencies: <code>npm install</code>
 4. Start the application: <code>npm run dev</code>
